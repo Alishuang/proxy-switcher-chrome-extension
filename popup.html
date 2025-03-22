@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Proxy Switcher</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <div class="header">
+    <h1>Proxy Switcher</h1>
+  </div>
+  
+  <div class="container">
+    <!-- Add New Proxy Section - Collapsible -->
+    <div class="section" id="add-proxy-section">
+      <div class="section-header" id="add-proxy-toggle">
+        <div class="section-header-title">
+          <i class="material-icons section-icon">add_circle</i>
+          Add New Proxy
+        </div>
+        <i class="material-icons chevron-icon" id="add-proxy-chevron">expand_more</i>
+      </div>
+      <div class="section-content" id="add-proxy-content">
+        <div class="tabs">
+          <button class="tab-button active" data-tab="manual">Manual</button>
+          <button class="tab-button" data-tab="pac">PAC File</button>
+        </div>
+        
+        <!-- Manual Proxy Tab -->
+        <div id="manual-config" class="tab-content active">
+          <div class="form-group">
+            <label for="proxyName">Proxy Name</label>
+            <input type="text" id="proxyName" placeholder="e.g. Work Proxy" />
+          </div>
+          
+          <div class="form-group">
+            <label for="proxyType">Proxy Type</label>
+            <select id="proxyType">
+              <option value="http">HTTP</option>
+              <option value="https">HTTPS</option>
+              <option value="socks4">SOCKS4</option>
+              <option value="socks5">SOCKS5</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="proxyHost">Host</label>
+            <input type="text" id="proxyHost" placeholder="e.g. 192.168.1.100" />
+          </div>
+          
+          <div class="form-group">
+            <label for="proxyPort">Port</label>
+            <input type="number" id="proxyPort" placeholder="e.g. 8080" />
+          </div>
+          
+          <button id="addProxy" class="btn btn-primary btn-block">Add Proxy</button>
+        </div>
+        
+        <!-- PAC File Tab -->
+        <div id="pac-config" class="tab-content">
+          <div class="form-group">
+            <label for="pacName">Configuration Name</label>
+            <input type="text" id="pacName" placeholder="e.g. Office PAC" />
+          </div>
+          
+          <div class="form-group">
+            <label>Source Type</label>
+            <div class="radio-group">
+              <label class="radio-label">
+                <input type="radio" name="pacSource" value="url" checked> URL
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="pacSource" value="file"> Local File
+              </label>
+            </div>
+          </div>
+          
+          <div id="pac-url-input" class="form-group">
+            <label for="pacUrl">PAC File URL</label>
+            <input type="text" id="pacUrl" placeholder="e.g. http://example.com/proxy.pac" />
+          </div>
+          
+          <div id="pac-file-input" class="form-group" style="display: none;">
+            <div class="file-upload-container">
+              <label for="pacFileUpload" class="file-upload-label">
+                <i class="material-icons" style="margin-right: 8px;">upload_file</i>
+                Choose PAC File
+              </label>
+              <input type="file" id="pacFileUpload" accept=".pac,.js" style="display: none;" />
+              <span id="selectedFileName">No file selected</span>
+            </div>
+          </div>
+          
+          <button id="addPacConfig" class="btn btn-primary btn-block">Add PAC Configuration</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Saved Proxies Section -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-header-title">
+          <i class="material-icons section-icon">list</i>
+          Saved Proxies
+        </div>
+      </div>
+      <div class="section-content expanded">
+        <ul class="proxy-list" id="savedProxies">
+          <!-- Proxy items will be inserted here -->
+        </ul>
+        
+        <div class="direct-connection">
+          <button id="directConnection" class="btn btn-secondary btn-block">
+            Use Direct Connection
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Current Status -->
+    <div id="currentStatus" class="status"></div>
+<!--    -->
+<!--    <!-- Test Connection Button -->
+<!--    <div class="button-section">-->
+<!--      <button id="testProxyConnection" class="btn btn-secondary btn-block">-->
+<!--        <i class="material-icons" style="font-size: 16px;">wifi_tethering</i>-->
+<!--        Test Proxy Connection-->
+<!--      </button>-->
+<!--    </div>-->
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
